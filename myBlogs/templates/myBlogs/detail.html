@@ -1,0 +1,195 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Page content-->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="mb-4">
+                    <!-- Post title-->
+                    <h1 class="fw-bolder mb-1">{{blog.title}}!</h1>
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2">Posted on {{blog.created}} by Start Bootstrap</div>
+                    <!-- Post categories-->
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{blog.category}}</a>
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                </header>
+                <!-- Preview image figure-->
+                <figure class="mb-4"><img class="img-fluid rounded" src="{{blog.thumbnail.url}}" alt="..." /></figure>
+                <!-- Post content-->
+                <section class="mb-5">
+                    <p class="fs-5 mb-4">{{blog.body | linebreaks}}</p>
+                   
+                </section>
+            </article>
+            <!-- Comments section-->
+            {% comment %} <section class="mb-5">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <!-- Comment form-->
+                         {% if request.user.is_authenticated %}
+                         
+                         <form class="mb-4" method= "POST">
+                            {% csrf_token %}
+                            {{form.body}}
+                            <br>
+                            <button class="btn btn-primary" style="width:100%">Drop your Comment</button>
+                        </form>
+                        {% else %}
+                        <h4>Login to drop your Comment</h4>
+                        <br>
+                         {% endif %}
+                        
+                        <!-- Comment with nested comments-->
+                         {% for comment in comments %}
+                         
+                         
+                         {% endfor %}
+                        <div class="d-flex mb-4">
+                            <!-- Parent comment-->
+                             {% if comment.user.profile_pic %}
+                             
+                             <div class="flex-shrink-0"><img class="rounded-circle" src="{{comment.user.profile_pic}}" alt="..." /></div>
+                             {% else %}
+                             <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+
+                             {% endif %}
+                            <div class="ms-3">
+                                <div class="fw-bold">{{comment.user.username}}</div>
+                                {{comment.body}}
+                                <!-- Child comment 1-->
+                                <div class="d-flex mt-4">
+                                    <div class="flex-shrink-0"><img class="rounded-circle" src="{{comment.user.profile_pic}}" alt="..." /></div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">{{comment.user.username}}</div>
+                                        {{comment.body}}
+                                    </div>
+                                </div>
+                                <!-- Child comment 2-->
+                                <div class="d-flex mt-4">
+                                    <div class="flex-shrink-0"><img class="rounded-circle" src="{{comment.user.profile_pic}}" alt="..." /></div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">{{comment.user.username}}</div>
+                                        {{comment.body}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single comment-->
+                        <div class="d-flex">
+                            <div class="flex-shrink-0"><img class="rounded-circle" src="{{comment.user.profile_pic}}" alt="..." /></div>
+                            <div class="ms-3">
+                                <div class="fw-bold">{{comment.user.username}}</div>
+                                {{comment.body}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> {% endcomment %}
+
+            <section class="mb-5">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <!-- Comment form -->
+                        {% if request.user.is_authenticated %}
+                        <form class="mb-4" method="POST">
+                            {% csrf_token %}
+                            {{ form.body }}
+                            <br>
+                            <button class="btn btn-primary" style="width: 100%">Drop your Comment</button>
+                        </form>
+                        {% else %}
+                        <h4>Login to drop your Comment</h4>
+                        <br>
+                        {% endif %}
+            
+                        <!-- Comments with nested comments -->
+                        {% for comment in comments %}
+                        <div class="d-flex mb-4">
+                            <!-- Parent comment -->
+                            <div class="flex-shrink-0">
+                                {% if comment.user.profile_pic %}
+                                <img class="rounded-circle profile-pic" src="{{ comment.user.profile_pic.url }}" alt="Profile Picture" />
+                                {% else %}
+                                <img class="rounded-circle profile-pic" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="Default Profile Picture" />
+                                {% endif %}
+                            </div>
+                            <div class="ms-3">
+                                <div class="fw-bold">{{ comment.user.username }}</div>
+                                <p>{{ comment.body }}</p>
+                                <!-- Child comments -->
+                                {% for child_comment in comment.child_comments.all %}
+                                <div class="d-flex mt-4">
+                                    <div class="flex-shrink-0">
+                                        {% if child_comment.user.profile_pic %}
+                                        <img class="rounded-circle profile-pic" src="{{ child_comment.user.profile_pic.url }}" alt="Profile Picture" />
+                                        {% else %}
+                                        <img class="rounded-circle profile-pic" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="Default Profile Picture" />
+                                        {% endif %}
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">{{ child_comment.user.username }}</div>
+                                        <p>{{ child_comment.body }}</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+            
+            <style>
+                .profile-pic {
+                    width: 50px; /* Set the width you prefer */
+                    height: 50px; /* Set the height you prefer */
+                    object-fit: cover; /* Maintain aspect ratio and cover the area */
+                }
+            </style>
+            
+        </div>
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+            <!-- Search widget-->
+            <div class="card mb-4">
+                <div class="card-header">Search</div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                        <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Categories widget-->
+            <div class="card mb-4">
+                <div class="card-header">Categories</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled mb-0">
+                                <li><a href="#!">Web Design</a></li>
+                                <li><a href="#!">HTML</a></li>
+                                <li><a href="#!">Freebies</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled mb-0">
+                                <li><a href="#!">JavaScript</a></li>
+                                <li><a href="#!">CSS</a></li>
+                                <li><a href="#!">Tutorials</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Side widget-->
+            <div class="card mb-4">
+                <div class="card-header">Side Widget</div>
+                <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+            </div>
+        </div>
+    </div>
+</div>{% endblock content %}

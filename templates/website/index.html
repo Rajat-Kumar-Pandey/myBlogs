@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample HTML Page</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Website</h1>
+    </header>
+    
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+    
+    <div class="container">
+        <div class="content">
+            <h2>Main Content</h2>
+            <p>This is a sample HTML page. You can modify this content to fit your needs.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 My Website. All rights reserved.</p>
+    </footer>
+</body>
+</html> {% endcomment %}
+
+
+
+
+{% block title %}
+Home Page
+{% endblock title %}
+
+{% block content %}
+<h1 class="bg-red-500 text-3xl ">chai o with code</h1>
+<hr>
+<h1 class="bg-red-500 text-3xl ">chai o with code</h1>
+<p class="text-center w-50 h-60 "> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero placeat corporis ipsum, pariatur ipsam eos esse molestiae nam corrupti, mollitia perferendis, adipisci aperiam dicta non ad sed molestias odit atque.</p>
+{% endblock  %}
