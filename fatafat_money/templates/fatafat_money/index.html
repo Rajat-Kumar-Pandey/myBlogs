@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatafat-Money</title>
+    <style>
+        /* style.css */
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 35vh; /* Adjust height if needed */
+        }
+
+        .clock {
+            width: 200px;
+            height: 200px;
+            border: 10px solid #333;
+            border-radius: 50%;
+            position: relative;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .clock::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .clock .hand {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: bottom;
+            background: #333;
+        }
+
+        .clock .hour {
+            width: 4px;
+            height: 50px;
+            transform: rotate(0deg);
+        }
+
+        .clock .minute {
+            width: 2px;
+            height: 70px;
+            transform: rotate(0deg);
+        }
+
+        .clock .second {
+            width: 1px;
+            height: 90px;
+            transform: rotate(0deg);
+            background: red;
+        }
+
+        /* Hour markers */
+        .clock .marker {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background: #333;
+            border-radius: 2px;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Hour numbers */
+        .clock .number {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            /* top: 50%; */  /* Remove this line */
+            top: calc(50% + 30px);  /* New line to position outside the clock face */
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+
+        .clock .number:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-85px); }
+        .clock .number:nth-child(2) { transform: translate(-50%, -50%) rotate(30deg) translateY(-85px); }
+        .clock .number:nth-child(3) { transform: translate(-50%, -50%) rotate(60deg) translateY(-85px); }
+        .clock .number:nth-child(4) { transform: translate(-50%, -50%) rotate(90deg) translateY(-85px); }
+        .clock .number:nth-child(5) { transform: translate(-50%, -50%) rotate(120deg) translateY(-85px); }
+        .clock .number:nth-child(6) { transform: translate(-50%, -50%) rotate(150deg) translateY(-85px); }
+        .clock .number:nth-child(7) { transform: translate(-50%, -50%) rotate(180deg) translateY(-85px); }
+        .clock .number:nth-child(8) { transform: translate(-50%, -50%) rotate(210deg) translateY(-85px); }
+        .clock .number:nth-child(9) { transform: translate(-50%, -50%) rotate(240deg) translateY(-85px); }
+        .clock .number:nth-child(10) { transform: translate(-50%, -50%) rotate(270deg) translateY(-85px); }
+        .clock .number:nth-child(11) { transform: translate(-50%, -50%) rotate(300deg) translateY(-85px); }
+        .clock .number:nth-child(12) { transform: translate(-50%, -50%) rotate(330deg) translateY(-85px); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="clock" id="clock">
+            <div class="hand hour"></div>
+            <div class="hand minute"></div>
+            <div class="hand second"></div>
+            <div class="number">12</div>
+            <div class="number">1</div>
+            <div class="number">2</div>
+            <div class="number">3</div>
+            <div class="number">4</div>
+            <div class="number">5</div>
+            <div class="number">6</div>
+            <div class="number">7</div>
+            <div class="number">8</div>
+            <div class="number">9</div>
+            <div class="number">10</div>
+            <div class="number">11</div>
+        </div>
+    </header>
+
+    <script>
+        // script.js
+
+        function updateClock() {
+            // Use luxon for time zone handling if needed
+            const now = new Date(); // For local time
+            // const now = luxon.DateTime.now().setZone('America/New_York'); // For specific time zone
+            
+            const second = now.getSeconds();
+            const minute = now.getMinutes();
+            const hour = now.getHours();
+            
+            const secondDegrees = (second / 60) * 360 + 90; // Adjust for CSS rotation
+            const minuteDegrees = (minute / 60) * 360 + 90;
+            const hourDegrees = (hour / 12) * 360 + (minute / 60) * 30 + 90;
+
+            document.querySelector('.second').style.transform = `rotate(${secondDegrees}deg)`;
+            document.querySelector('.minute').style.transform = `rotate(${minuteDegrees}deg)`;
+            document.querySelector('.hour').style.transform = `rotate(${hourDegrees}deg)`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to set the clock immediately
+    </script>
+</body>
+</html>

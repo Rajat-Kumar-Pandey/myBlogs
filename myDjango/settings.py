@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'myBlogs',
+    'fatafat_money',
 ]
 
 TAILWIND_APP_NAME = 'theme'

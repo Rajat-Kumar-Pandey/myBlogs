@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Blog, Comment, Category
 from .forms import CreateBlogForm, CommentForm
@@ -146,19 +146,42 @@ def create_article(request):
     return render(request, "myBlogs/create.html", context)
     
     
+# @login_required(login_url="signin")
+# def update_article(request, slug):
+#     update = True
+#     blog = Blog.objects.get(slug=slug)
+#     form=CreateBlogForm(instance=blog)
+#     if request.method == 'POST':
+#         form = CreateBlogForm(request.POST, request.FILES, instance=blog)
+#         blog = form.save(commit=False)
+#         blog.slug=slugify(request.POST["title"])
+#         blog.save()
+#         messages.success(request, "Article updated successfully")
+#         return redirect("profile")
+#     context={"update":update, "form":form}
+#     return render(request, "myBlogs/create.html", context)
 @login_required(login_url="signin")
 def update_article(request, slug):
-    update = True
-    blog = Blog.objects.get(slug=slug)
-    form=CreateBlogForm(instance=blog)
+    # Fetch the blog instance or return a 404 if not found
+    blog = get_object_or_404(Blog, slug=slug)
+    form = CreateBlogForm(instance=blog)
+    
     if request.method == 'POST':
         form = CreateBlogForm(request.POST, request.FILES, instance=blog)
-        blog = form.save(commit=False)
-        blog.slug=slugify(request.POST["title"])
-        blog.save()
-        messages.success(request, "Article updated successfully")
-        return redirect("profile")
-    context={"update":update, "form":form}
+        if form.is_valid():
+            # Save the form but don't commit to the database yet
+            blog = form.save(commit=False)
+            # Update the slug based on the new title
+            blog.slug = slugify(form.cleaned_data["title"])
+            # Save the blog instance
+            blog.save()
+            messages.success(request, "Article updated successfully")
+            return redirect("profile")
+        else:
+            # Add form errors to messages
+            messages.error(request, "There was an error updating the article. Please check the form and try again.")
+    
+    context = {"update": True, "form": form}
     return render(request, "myBlogs/create.html", context)
 
 
