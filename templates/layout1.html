@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {% block styles %}{% endblock %}
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {% block scripts %}{% endblock %}
+    <footer class="py-3 mb-0 pb-0 bg-dark">
+        <div class="container">
+            <div class="row">
+                <!-- Navigation Links -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">About</a></li>
+                        <li><a href="#" class="text-white">Tech Journeys</a></li>
+                        <li><a href="#" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white">Connect with Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" target="_blank" class="text-white">Twitter</a></li>
+                        <li><a href="#" target="_blank" class="text-white">LinkedIn</a></li>
+                        <li><a href="#" target="_blank" class="text-white">GitHub</a></li>
+                    </ul>
+                </div>
+
+                <!-- Learning Resources -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white">Learning Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" target="_blank" class="text-white">FreeCodeCamp</a></li>
+                        <li><a href="#" target="_blank" class="text-white">NetNinja</a></li>
+                        <li><a href="#" target="_blank" class="text-white">Web Dev Simplified</a></li>
+                        <li><a href="#" target="_blank" class="text-white">TestDriven.io</a></li>
+                        <li><a href="#" target="_blank" class="text-white">Geek for Geeks</a></li>
+                    </ul>
+                </div>
+
+                <!-- Copyright Information -->
+                <div class="col-lg-3">
+                    <h5 class="text-white">© ZealousMind</h5>
+                    <p class="text-white">All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+  </body>
+</html>

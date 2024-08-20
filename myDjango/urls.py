@@ -13,7 +13,9 @@ urlpatterns = [
     path('user/', include('myDude.urls')),
     path('myNotepad/', include('myNotepad.urls')),
     path('myBlogs/', include('myBlogs.urls')),
-    path('fatafat/', include('fatafat_money.urls')),  # Added trailing slash
+    path('fatafat/', include('fatafat_money.urls')), 
+    path('myGpt/', include('myGpt.urls')),  # Added trailing slash
+    # Added trailing slash
     
     # Development tools (optional, for development purposes)
     path("__reload__/", include("django_browser_reload.urls")),

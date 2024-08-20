@@ -1,160 +1,176 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fatafat-Money</title>
-    <style>
-        /* style.css */
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-
-        header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 35vh; /* Adjust height if needed */
-        }
-
-        .clock {
-            width: 200px;
-            height: 200px;
-            border: 10px solid #333;
-            border-radius: 50%;
-            position: relative;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .clock::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 10px;
-            height: 10px;
-            background: #333;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .clock .hand {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform-origin: bottom;
-            background: #333;
-        }
-
-        .clock .hour {
-            width: 4px;
-            height: 50px;
-            transform: rotate(0deg);
-        }
-
-        .clock .minute {
-            width: 2px;
-            height: 70px;
-            transform: rotate(0deg);
-        }
-
-        .clock .second {
-            width: 1px;
-            height: 90px;
-            transform: rotate(0deg);
-            background: red;
-        }
-
-        /* Hour markers */
-        .clock .marker {
-            position: absolute;
-            width: 2px;
-            height: 10px;
-            background: #333;
-            border-radius: 2px;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Hour numbers */
-        .clock .number {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            text-align: center;
-            line-height: 20px;
-            font-size: 14px;
-            font-weight: bold;
-            color: #333;
-            /* top: 50%; */  /* Remove this line */
-            top: calc(50% + 30px);  /* New line to position outside the clock face */
-            left: 50%;
-            transform: translate(-50%, -50%);
-          }
-
-        .clock .number:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-85px); }
-        .clock .number:nth-child(2) { transform: translate(-50%, -50%) rotate(30deg) translateY(-85px); }
-        .clock .number:nth-child(3) { transform: translate(-50%, -50%) rotate(60deg) translateY(-85px); }
-        .clock .number:nth-child(4) { transform: translate(-50%, -50%) rotate(90deg) translateY(-85px); }
-        .clock .number:nth-child(5) { transform: translate(-50%, -50%) rotate(120deg) translateY(-85px); }
-        .clock .number:nth-child(6) { transform: translate(-50%, -50%) rotate(150deg) translateY(-85px); }
-        .clock .number:nth-child(7) { transform: translate(-50%, -50%) rotate(180deg) translateY(-85px); }
-        .clock .number:nth-child(8) { transform: translate(-50%, -50%) rotate(210deg) translateY(-85px); }
-        .clock .number:nth-child(9) { transform: translate(-50%, -50%) rotate(240deg) translateY(-85px); }
-        .clock .number:nth-child(10) { transform: translate(-50%, -50%) rotate(270deg) translateY(-85px); }
-        .clock .number:nth-child(11) { transform: translate(-50%, -50%) rotate(300deg) translateY(-85px); }
-        .clock .number:nth-child(12) { transform: translate(-50%, -50%) rotate(330deg) translateY(-85px); }
-    </style>
+    <title>Analog Clock</title>
+    <link rel="stylesheet" href="{% static 'fatafat_money/css/style.css' %}">
+    
+   
 </head>
 <body>
-    <header>
-        <div class="clock" id="clock">
-            <div class="hand hour"></div>
-            <div class="hand minute"></div>
-            <div class="hand second"></div>
-            <div class="number">12</div>
-            <div class="number">1</div>
-            <div class="number">2</div>
-            <div class="number">3</div>
-            <div class="number">4</div>
-            <div class="number">5</div>
-            <div class="number">6</div>
-            <div class="number">7</div>
-            <div class="number">8</div>
-            <div class="number">9</div>
-            <div class="number">10</div>
-            <div class="number">11</div>
+
+    <div class="container">
+        <div class="clock">
+            <div class="hour-hand"></div>
+            <div class="minute-hand"></div>
+            <div class="second-hand"></div>
+            <div class="hourly-timer">00:00</div>
         </div>
-    </header>
+    </div>
 
+    <div class="header">
+        <h1>FATAFAT-MONEY</h1>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <!-- Create headers if needed -->
+                <th colspan="24">Game Schedule</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <!-- Create 24 columns with "Game 1 - No" -->x
+                <td>Game 1 - No</td>
+                <td>Game 2 - No</td>
+                <td>Game 3 - No</td>
+                <td>Game 4 - No</td>
+                <td>Game 5 - No</td>
+                <td>Game 6 - No</td>
+                <td>Game 7 - No</td>
+                <td>Game 8 - No</td>
+                
+            </tr>
+        </tbody>
+    </table>
+    
+    {% comment %} callender pros=cess {% endcomment %}
+    <div class="calendar">
+        <div class="calendar-top">
+            <select id="monthDropdown">
+                <!-- Options for months will be added dynamically -->
+            </select>
+            <select id="yearDropdown">
+                <!-- Options for years will be added dynamically -->
+            </select>
+            <button id="searchButton">Search</button>
+        </div>
+        <div class="calendar-body ">
+            <div class="days-column">
+                <!-- Days of the month will be added dynamically -->
+            </div>
+            <div class="games-column">
+                <!-- Rows for game results -->
+                <div class="game-row">
+                    <!-- Game results for each day -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
     <script>
-        // script.js
-
         function updateClock() {
-            // Use luxon for time zone handling if needed
-            const now = new Date(); // For local time
-            // const now = luxon.DateTime.now().setZone('America/New_York'); // For specific time zone
-            
+            const now = new Date();
             const second = now.getSeconds();
             const minute = now.getMinutes();
             const hour = now.getHours();
-            
-            const secondDegrees = (second / 60) * 360 + 90; // Adjust for CSS rotation
-            const minuteDegrees = (minute / 60) * 360 + 90;
+
+            const secondDegrees = (second / 60) * 360 + 90;
+            const minuteDegrees = (minute / 60) * 360 + (second / 60) * 6 + 90;
             const hourDegrees = (hour / 12) * 360 + (minute / 60) * 30 + 90;
 
-            document.querySelector('.second').style.transform = `rotate(${secondDegrees}deg)`;
-            document.querySelector('.minute').style.transform = `rotate(${minuteDegrees}deg)`;
-            document.querySelector('.hour').style.transform = `rotate(${hourDegrees}deg)`;
+            document.querySelector('.second-hand').style.transform = `rotate(${secondDegrees}deg)`;
+            document.querySelector('.minute-hand').style.transform = `rotate(${minuteDegrees}deg)`;
+            document.querySelector('.hour-hand').style.transform = `rotate(${hourDegrees}deg)`;
+
+            updateHourlyTimer(minute, second);
         }
 
+        function updateHourlyTimer(minute, second) {
+            const remainingMinutes = 59 - minute;
+            const remainingSeconds = 59 - second;
+
+            const formattedMinutes = remainingMinutes < 10 ? `0${remainingMinutes}` : remainingMinutes;
+            const formattedSeconds = remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds;
+
+            document.querySelector('.hourly-timer').textContent = `${formattedMinutes}:${formattedSeconds}`;
+        }
+
+        
+
         setInterval(updateClock, 1000);
-        updateClock(); // Initial call to set the clock immediately
+        updateClock();
+
+
+
+        {% comment %} callenderjs {% endcomment %}
+        document.addEventListener('DOMContentLoaded', function() {
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            const years = Array.from({length: 21}, (_, i) => new Date().getFullYear() - 10 + i);
+        
+            const monthDropdown = document.getElementById('monthDropdown');
+            const yearDropdown = document.getElementById('yearDropdown');
+            const searchButton = document.getElementById('searchButton');
+        
+            months.forEach((month, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = month;
+                monthDropdown.appendChild(option);
+            });
+        
+            years.forEach(year => {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearDropdown.appendChild(option);
+            });
+        
+            function updateDaysOfMonth(month, year) {
+                const daysColumn = document.querySelector('.days-column');
+                const gamesColumn = document.querySelector('.games-column');
+                daysColumn.innerHTML = '';
+                gamesColumn.innerHTML = '<div class="game-header">Game Results</div>';
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const day = document.createElement('div');
+                    day.className = 'day';
+                    day.textContent = i;
+                    daysColumn.appendChild(day);
+                    
+                    const gameRow = document.createElement('div');
+                    gameRow.className = 'game-row';
+                    for (let j = 0; j < 8; j++) {
+                        const gameCell = document.createElement('div');
+                        gameCell.textContent = 'Game ' + (j + 1) + ' - No';
+                        gameRow.appendChild(gameCell);
+                    }
+                    gamesColumn.appendChild(gameRow);
+                }
+            }
+        
+            searchButton.addEventListener('click', function() {
+                const month = parseInt(monthDropdown.value);
+                const year = parseInt(yearDropdown.value);
+                updateDaysOfMonth(month, year);
+            });
+        
+            // Initialize calendar with current month and year
+            const today = new Date();
+            monthDropdown.value = today.getMonth();
+            yearDropdown.value = today.getFullYear();
+            updateDaysOfMonth(today.getMonth(), today.getFullYear());
+        });
     </script>
+
 </body>
 </html>

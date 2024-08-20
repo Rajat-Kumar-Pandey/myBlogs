@@ -1,0 +1,211 @@
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    background-color: #0c0404;
+}
+
+.container {
+    display: flex;
+    height: 500px;
+    width: 400px;
+}
+
+.clock {
+    left: 115vh;
+    top: -28%;
+    position: relative;
+    width: 800px;
+    height: 700px;
+    background: transparent;
+    background-image: url("{% static 'fatafat_money/img/bg-clock.png' %}") ; /* Ensure the path is correct */
+    background-size: cover;
+    background-position: 50%;
+    z-index: 30;
+    border: 4px solid #ddd;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.clock::after {
+    content: '';
+    position: absolute;
+    top: 48.7%;
+    left: 47.8%;
+    width: 12px;
+    height: 12px;
+    background: rgb(136, 53, 53);
+    border-radius: 50%;
+    transform: translate(50%, 25%);
+}
+
+.hour-hand, .minute-hand, .second-hand {
+    position: absolute;
+    width: 25%;
+    background-color: white;
+    transform-origin: 100%;
+    transform: rotate(90deg);
+}
+
+.hour-hand {
+    height: 5px;
+    top: 50%;
+    left: 25%;
+}
+
+.minute-hand {
+    height: 2px;
+    top: 50%;
+    left: 25%;
+}
+
+.second-hand {
+    height: 2px;
+    top: 50%;
+    left: 25%;
+    background-color: red;
+}
+
+.hourly-timer {
+    position: absolute;
+    bottom: -13%;
+    left: 50%;
+    transform: translate(-50%, -150%);
+    font-size: 3.5rem;
+    font-weight: bolder;
+    color: #333;
+    padding: 2%;
+    border: 3px solid antiquewhite;
+    border-radius: 40%;
+}
+
+.header {
+    height: 10vh;
+    width: 50vh;
+    position: absolute;
+    margin-left: 20%;
+    margin-top: 2%;
+    border: 2px solid navajowhite;
+}
+
+.header h1 {
+    position: absolute;
+    color: antiquewhite;
+    left: 23px;
+}
+
+table {
+    position: absolute;
+    top: 125px;
+    left: 20px;
+    width: 700px; /* Set the width of the table */
+    border-collapse: collapse;
+    z-index: 1;
+    overflow-x: auto; /* Allows horizontal scrolling if needed */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+td {
+    background-color: #fff;
+}
+
+tr {
+    display: flex;
+}
+
+td {
+    flex: 1;
+    min-width: calc(800px / 24); /* 800px divided by 24 columns */
+}
+
+.calendar {
+    position: absolute;
+    border: 5px solid blue;
+    top: 250px;
+    left: 50px;
+    height: 320px;
+    width: 600px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    overflow: hidden;
+}
+
+.calendar-top {
+    border: 1px solid red;
+    padding: 5px;
+    width: 96.5%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendar-top select {
+    width: 30%;
+}
+
+.calendar-top button {
+    width: 20%;
+    padding: 5px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.calendar-body {
+    display: flex;
+    height: calc(100% - 40px); /* Adjust height to fit the container */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.days-column {
+    width: 100px;
+    height: 100%;
+    border-right: 1px solid red;
+    padding-right: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.days-column .day {
+    text-align: center;
+    padding: 2px 0;
+    flex: 1; /* Ensure equal height for all days */
+}
+
+.games-column {
+    flex: 1;
+    padding-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-row {
+    display: flex;
+    border-bottom: 1px solid red;
+    padding: 2px 0;
+    flex: 1; /* Ensure equal height for all game rows */
+}
+
+.game-row div {
+    flex: 1;
+    border-right: 1px solid red;
+    padding: 2px;
+    text-align: center;
+}
+
+.game-row div:last-child {
+    border-right: none;
+}
